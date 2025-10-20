@@ -24,7 +24,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include <stdio.h>
+#include "lcd.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -89,9 +90,19 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_USART1_UART_Init();
+  MX_UART5_Init();
   /* USER CODE BEGIN 2 */
-
+  lcd_init();                                         /* 初始化LCD */
+  uint8_t lcd_id[12];
+  g_point_color = RED;
+  sprintf((char *)lcd_id, "LCD ID:%04X", lcddev.id);  /* 将LCD ID打印到lcd_id数组 */
+  lcd_clear(BLUE);
+  lcd_show_string(10, 40, 240, 32, 32, "STM32", RED);
+  lcd_show_string(10, 80, 240, 24, 24, "TFTLCD TEST", RED);
+  lcd_show_string(10, 110, 240, 16, 16, "ATOM@ALIENTEK", RED);
+  lcd_show_string(10, 130, 240, 16, 16, (char *)lcd_id, RED); /* 显示LCD ID */
+  
+  printf("hello lvgl\r\n");
   /* USER CODE END 2 */
 
   /* Init scheduler */

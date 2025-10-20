@@ -1,0 +1,98 @@
+T4B50 000:006.946   SEGGER J-Link V8.74a Log File
+T4B50 000:007.048   DLL Compiled: Oct  2 2025 18:07:09
+T4B50 000:007.054   Logging started @ 2025-10-20 15:06
+T4B50 000:007.059   Process: D:\Keil_v5\UV4\UV4.exe
+T4B50 000:007.069 - 7.064ms 
+T4B50 000:007.078 JLINK_SetWarnOutHandler(...)
+T4B50 000:007.083 - 0.006ms 
+T4B50 000:007.091 JLINK_OpenEx(...)
+T4B50 000:010.890   Firmware: J-Link OB-Mini Plus-CortexM compiled Mar  8 2099 11:15:54
+T4B50 000:011.551   Firmware: J-Link OB-Mini Plus-CortexM compiled Mar  8 2099 11:15:54
+T4B50 000:015.554   Hardware: V1.00
+T4B50 000:015.571   S/N: 63728764
+T4B50 000:015.580   OEM: SEGGER
+T4B50 000:015.590   Feature(s): GDB, RDI, FlashBP, FlashDL, JFlash
+T4B50 000:016.224   Bootloader: (FW returned invalid version)
+T4B50 000:017.118   TELNET listener socket opened on port 19021
+T4B50 000:017.191   WEBSRV WEBSRV_Init(): Starting webserver thread(s)
+T4B50 000:017.430   WEBSRV Webserver running on local port 19080
+T4B50 000:017.524   Looking for J-Link GUI Server exe at: D:\Keil_v5\ARM\Segger\JLinkGUIServer.exe
+T4B50 000:017.591   Looking for J-Link GUI Server exe at: D:\SEGGER\JLink_V874a\JLinkGUIServer.exe
+T4B50 000:017.603   Forking J-Link GUI Server: D:\SEGGER\JLink_V874a\JLinkGUIServer.exe
+T4B50 000:240.857   J-Link GUI Server info: "J-Link GUI server V8.74a "
+T4B50 000:243.109 - 236.005ms returns "O.K."
+T4B50 000:243.164 JLINK_GetEmuCaps()
+T4B50 000:243.177 - 0.010ms returns 0xB8EA5A33
+T4B50 000:243.194 JLINK_TIF_GetAvailable(...)
+T4B50 000:243.468 - 0.273ms 
+T4B50 000:243.487 JLINK_SetErrorOutHandler(...)
+T4B50 000:243.493 - 0.005ms 
+T4B50 000:243.526 JLINK_ExecCommand("ProjectFile = "E:\Desktop\STM32F103RCT6\MDK-ARM\JLinkSettings.ini"", ...). 
+T4B50 000:274.522   Ref file found at: D:\Keil_v5\ARM\Segger\JLinkDevices.ref
+T4B50 000:274.793   REF file references invalid XML file: D:\SEGGER\JLink_V874a\JLinkDevices.xml
+T4B50 000:275.793 - 32.265ms returns 0x00
+T4B50 000:279.040 JLINK_ExecCommand("Device = STM32F103RC", ...). 
+T4B50 000:282.407   Device "STM32F103RC" selected.
+T4B50 000:282.758 - 3.701ms returns 0x00
+T4B50 000:282.772 JLINK_ExecCommand("DisableConnectionTimeout", ...). 
+T4B50 000:282.788   ERROR: Unknown command
+T4B50 000:282.796 - 0.012ms returns 0x01
+T4B50 000:282.803 JLINK_GetHardwareVersion()
+T4B50 000:282.809 - 0.005ms returns 10000
+T4B50 000:282.815 JLINK_GetDLLVersion()
+T4B50 000:282.820 - 0.005ms returns 87401
+T4B50 000:282.828 JLINK_GetOEMString(...)
+T4B50 000:282.835 JLINK_GetFirmwareString(...)
+T4B50 000:282.840 - 0.005ms 
+T4B50 000:290.712 JLINK_GetDLLVersion()
+T4B50 000:290.753 - 0.039ms returns 87401
+T4B50 000:290.761 JLINK_GetCompileDateTime()
+T4B50 000:290.767 - 0.005ms 
+T4B50 000:293.534 JLINK_GetFirmwareString(...)
+T4B50 000:293.555 - 0.021ms 
+T4B50 000:296.334 JLINK_GetHardwareVersion()
+T4B50 000:296.346 - 0.012ms returns 10000
+T4B50 000:298.792 JLINK_GetSN()
+T4B50 000:298.804 - 0.012ms returns 63728764
+T4B50 000:301.282 JLINK_GetOEMString(...)
+T4B50 014:749.173 JLINK_TIF_Select(JLINKARM_TIF_JTAG)
+T4B50 014:749.539   
+  ***** Error: 
+T4B50 014:749.552   Debugger tries to select target interface JTAG.
+This interface is not supported by the connected emulator.
+Selection will be ignored by the DLL.
+T4B50 014:749.560 - 0.400ms returns 0x01
+T4B50 014:755.110 JLINK_HasError()
+T4B50 014:755.152 JLINK_SetSpeed(5000)
+T4B50 014:755.158 - 0.009ms 
+T4B50 014:755.166 JLINK_GetId()
+T4B50 014:759.030   InitTarget() start
+T4B50 014:759.050    J-Link Script File: Executing InitTarget()
+T4B50 014:765.704   SWD selected. Executing JTAG -> SWD switching sequence.
+T4B50 014:771.608   Error: Failed to initialize DAP.
+T4B50 014:774.683   Can not attach to CPU. Trying connect under reset.
+T4B50 014:829.138   SWD selected. Executing JTAG -> SWD switching sequence.
+T4B50 014:835.394   Error: Failed to initialize DAP.
+T4B50 014:837.994   Connecting to CPU via connect under reset failed.
+T4B50 014:888.896   
+  ***** Error: 
+T4B50 014:888.978   J-Link script file function InitTarget() returned with error code -1
+T4B50 014:893.318   InitTarget() end - Took 129ms
+T4B50 014:896.422   Connect failed. Resetting via Reset pin and trying again.
+T4B50 014:960.797   InitTarget() start
+T4B50 014:960.832    J-Link Script File: Executing InitTarget()
+T4B50 014:963.890   SWD selected. Executing JTAG -> SWD switching sequence.
+T4B50 014:969.293   Error: Failed to initialize DAP.
+T4B50 014:973.960   Can not attach to CPU. Trying connect under reset.
+T4B50 015:028.459   SWD selected. Executing JTAG -> SWD switching sequence.
+T4B50 015:036.968   Error: Failed to initialize DAP.
+T4B50 015:041.699   Connecting to CPU via connect under reset failed.
+T4B50 015:092.173   
+  ***** Error: 
+T4B50 015:092.240   J-Link script file function InitTarget() returned with error code -1
+T4B50 015:095.776   InitTarget() end - Took 131ms
+T4B50 015:095.794 - 340.627ms returns 0x00000000
+T4B50 016:242.043 JLINK_Close()
+T4B50 016:255.053 - 13.008ms
+T4B50 016:255.085   
+T4B50 016:255.093   Closed
