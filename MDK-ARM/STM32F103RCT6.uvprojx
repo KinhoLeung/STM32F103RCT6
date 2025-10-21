@@ -537,6 +537,11 @@
                 </FileArmAds>
               </FileOption>
             </File>
+            <File>
+              <FileName>touch.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\touch.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

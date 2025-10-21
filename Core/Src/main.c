@@ -26,6 +26,7 @@
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
 #include "lcd.h"
+#include "touch.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -93,6 +94,7 @@ int main(void)
   MX_UART5_Init();
   /* USER CODE BEGIN 2 */
   lcd_init();                                         /* 初始化LCD */
+  tp_dev.init();                      /* 触摸屏初始化 */
   uint8_t lcd_id[12];
   g_point_color = RED;
   sprintf((char *)lcd_id, "LCD ID:%04X", lcddev.id);  /* 将LCD ID打印到lcd_id数组 */
