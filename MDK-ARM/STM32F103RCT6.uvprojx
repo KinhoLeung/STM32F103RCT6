@@ -330,7 +330,7 @@
             <uC99>1</uC99>
             <uGnu>0</uGnu>
             <useXO>0</useXO>
-            <v6Lang>3</v6Lang>
+            <v6Lang>5</v6Lang>
             <v6LangP>3</v6LangP>
             <vShortEn>1</vShortEn>
             <vShortWch>1</vShortWch>
@@ -1366,7 +1366,37 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Middlewares/lvgl/example/porting</GroupName>
+        </Group>
+        <Group>
+          <GroupName>Middlewares/lvgl/src/core</GroupName>
+        </Group>
+        <Group>
+          <GroupName>Middlewares/lvgl/src/draw</GroupName>
+        </Group>
+        <Group>
+          <GroupName>Middlewares/lvgl/src/extra</GroupName>
+        </Group>
+        <Group>
+          <GroupName>Middlewares/lvgl/src/font</GroupName>
+        </Group>
+        <Group>
+          <GroupName>Middlewares/lvgl/src/gpu</GroupName>
+        </Group>
+        <Group>
+          <GroupName>Middlewares/lvgl/src/hal</GroupName>
+        </Group>
+        <Group>
+          <GroupName>Middlewares/lvgl/src/misc</GroupName>
+        </Group>
+        <Group>
+          <GroupName>Middlewares/lvgl/src/widgwts</GroupName>
+        </Group>
+        <Group>
           <GroupName>::CMSIS</GroupName>
+        </Group>
+        <Group>
+          <GroupName>::LVGL</GroupName>
         </Group>
       </Groups>
     </Target>
@@ -1381,13 +1411,61 @@
           <targetInfo name="STM32F103RCT6"/>
         </targetInfos>
       </component>
+      <component Cbundle="LVGL9" Cclass="LVGL" Cgroup="Demos" Csub="Assets" Cvendor="LVGL" Cversion="9.4.0" condition="LVGL-Essential">
+        <package name="lvgl" schemaVersion="1.7.37" url="https://raw.githubusercontent.com/lvgl/lvgl/master/env_support/cmsis-pack/" vendor="LVGL" version="9.4.0"/>
+        <targetInfos>
+          <targetInfo name="STM32F103RCT6"/>
+        </targetInfos>
+      </component>
+      <component Cbundle="LVGL9" Cclass="LVGL" Cgroup="Demos" Csub="Widgets" Cvendor="LVGL" Cversion="9.4.0" condition="LVGL-Essential-Assets">
+        <package name="lvgl" schemaVersion="1.7.37" url="https://raw.githubusercontent.com/lvgl/lvgl/master/env_support/cmsis-pack/" vendor="LVGL" version="9.4.0"/>
+        <targetInfos>
+          <targetInfo name="STM32F103RCT6"/>
+        </targetInfos>
+      </component>
+      <component Cbundle="LVGL9" Cclass="LVGL" Cgroup="Essential" Cvendor="LVGL" Cversion="9.4.0">
+        <package name="lvgl" schemaVersion="1.7.37" url="https://raw.githubusercontent.com/lvgl/lvgl/master/env_support/cmsis-pack/" vendor="LVGL" version="9.4.0"/>
+        <targetInfos>
+          <targetInfo name="STM32F103RCT6"/>
+        </targetInfos>
+      </component>
+      <component Cbundle="LVGL9" Cclass="LVGL" Cgroup="OS Abstraction Layer" Cvariant="FreeRTOS" Cvendor="LVGL" Cversion="9.4.0" condition="LVGL-Essential">
+        <package name="lvgl" schemaVersion="1.7.37" url="https://raw.githubusercontent.com/lvgl/lvgl/master/env_support/cmsis-pack/" vendor="LVGL" version="9.4.0"/>
+        <targetInfos>
+          <targetInfo name="STM32F103RCT6"/>
+        </targetInfos>
+      </component>
+      <component Cbundle="LVGL9" Cclass="LVGL" Cgroup="Porting" Csub="Display" Cvariant="Generic" Cvendor="LVGL" Cversion="9.4.0" condition="LVGL-Essential">
+        <package name="lvgl" schemaVersion="1.7.37" url="https://raw.githubusercontent.com/lvgl/lvgl/master/env_support/cmsis-pack/" vendor="LVGL" version="9.4.0"/>
+        <targetInfos>
+          <targetInfo name="STM32F103RCT6"/>
+        </targetInfos>
+      </component>
     </components>
     <files>
       <file attr="config" category="preIncludeGlobal" name="lv_conf_cmsis.h" version="3.0.0">
-        <instance index="0" removed="1">RTE\LVGL\lv_conf_cmsis.h</instance>
+        <instance index="0">RTE\LVGL\lv_conf_cmsis.h</instance>
         <component Cbundle="LVGL9" Cclass="LVGL" Cgroup="Essential" Cvendor="LVGL" Cversion="9.4.0"/>
         <package name="lvgl" schemaVersion="1.7.37" url="https://raw.githubusercontent.com/lvgl/lvgl/master/env_support/cmsis-pack/" vendor="LVGL" version="9.4.0"/>
-        <targetInfos/>
+        <targetInfos>
+          <targetInfo name="STM32F103RCT6"/>
+        </targetInfos>
+      </file>
+      <file attr="config" category="sourceC" name="examples\porting\lv_port_disp_template.c" version="2.1.0">
+        <instance index="0">RTE\LVGL\lv_port_disp_template.c</instance>
+        <component Cbundle="LVGL9" Cclass="LVGL" Cgroup="Porting" Csub="Display" Cvariant="Generic" Cvendor="LVGL" Cversion="9.4.0" condition="LVGL-Essential" isDefaultVariant="1"/>
+        <package name="lvgl" schemaVersion="1.7.37" url="https://raw.githubusercontent.com/lvgl/lvgl/master/env_support/cmsis-pack/" vendor="LVGL" version="9.4.0"/>
+        <targetInfos>
+          <targetInfo name="STM32F103RCT6"/>
+        </targetInfos>
+      </file>
+      <file attr="config" category="header" name="examples\porting\lv_port_disp_template.h" version="2.1.0">
+        <instance index="0">RTE\LVGL\lv_port_disp_template.h</instance>
+        <component Cbundle="LVGL9" Cclass="LVGL" Cgroup="Porting" Csub="Display" Cvariant="Generic" Cvendor="LVGL" Cversion="9.4.0" condition="LVGL-Essential" isDefaultVariant="1"/>
+        <package name="lvgl" schemaVersion="1.7.37" url="https://raw.githubusercontent.com/lvgl/lvgl/master/env_support/cmsis-pack/" vendor="LVGL" version="9.4.0"/>
+        <targetInfos>
+          <targetInfo name="STM32F103RCT6"/>
+        </targetInfos>
       </file>
     </files>
   </RTE>

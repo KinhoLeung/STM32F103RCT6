@@ -15,6 +15,14 @@
  */
 #define CMSIS_device_header "stm32f10x.h"
 
+/* LVGL::LVGL&LVGL9:Demos:Widgets@9.4.0 */
+/*! \brief enable demo:widgets support */
+#define LV_USE_DEMO_WIDGETS             1
+/* LVGL::LVGL&LVGL9:Essential@9.4.0 */
+/*! \brief Enable LVGL */
+#define RTE_GRAPHICS_LVGL
+/* LVGL::LVGL&LVGL9:OS Abstraction Layer&FreeRTOS@9.4.0 */
+#define LV_USE_OS   LV_OS_FREERTOS
 
 
 #endif /* RTE_COMPONENTS_H */
