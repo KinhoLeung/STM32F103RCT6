@@ -5,7 +5,8 @@
  * @version     V1.2
  * @date        2023-05-31
  * @brief       2.8寸/3.5寸/4.3寸/7寸 TFTLCD(MCU屏) 驱动代码
- *              支持驱动IC型号包括:ILI9341/NT35310/NT35510/SSD1963/ST7789/ST7796/ILI9806 等
+ *              支持驱动IC型号包括:ILI9341/NT35310/NT35510/SSD1963/ST7789/ST7796/ILI9806
+ *等
  *
  * @license     Copyright (c) 2020-2032, 广州市星翼电子科技有限公司
  ****************************************************************************************************
@@ -31,8 +32,6 @@
 #ifndef __LCD_H
 #define __LCD_H
 
-
-#include "stdlib.h"
 #include "main.h"
 
 /******************************************************************************************/
@@ -44,64 +43,64 @@
 /* RESET 和系统复位脚共用 所以这里不用定义 RESET引脚 */
 // #define LCD_RST_GPIO_PORT               GPIOx
 // #define LCD_RST_GPIO_PIN                GPIO_PIN_x
-// #define LCD_RST_GPIO_CLK_ENABLE()       do{ __HAL_RCC_GPIOx_CLK_ENABLE(); }while(0)   /* 所在IO口时钟使能 */
+// #define LCD_RST_GPIO_CLK_ENABLE()       do{ __HAL_RCC_GPIOx_CLK_ENABLE();
+// }while(0)   /* 所在IO口时钟使能 */
 
 #define LCD_BL_GPIO_PORT GPIOC
 #define LCD_BL_GPIO_PIN GPIO_PIN_10
-#define LCD_BL_GPIO_CLK_ENABLE()                                                                                       \
-    do                                                                                                                 \
-    {                                                                                                                  \
-        __HAL_RCC_GPIOC_CLK_ENABLE();                                                                                  \
-    } while (0) /* 所在IO口时钟使能 */
+#define LCD_BL_GPIO_CLK_ENABLE()                                               \
+  do {                                                                         \
+    __HAL_RCC_GPIOC_CLK_ENABLE();                                              \
+  } while (0) /* 所在IO口时钟使能 */
 
 #define LCD_WR_GPIO_PORT GPIOC
 #define LCD_WR_GPIO_PIN GPIO_PIN_7
-#define LCD_WR_GPIO_CLK_ENABLE()                                                                                       \
-    do                                                                                                                 \
-    {                                                                                                                  \
-        __HAL_RCC_GPIOC_CLK_ENABLE();                                                                                  \
-    } while (0) /* 所在IO口时钟使能 */
+#define LCD_WR_GPIO_CLK_ENABLE()                                               \
+  do {                                                                         \
+    __HAL_RCC_GPIOC_CLK_ENABLE();                                              \
+  } while (0) /* 所在IO口时钟使能 */
 
 #define LCD_RD_GPIO_PORT GPIOC
 #define LCD_RD_GPIO_PIN GPIO_PIN_6
-#define LCD_RD_GPIO_CLK_ENABLE()                                                                                       \
-    do                                                                                                                 \
-    {                                                                                                                  \
-        __HAL_RCC_GPIOC_CLK_ENABLE();                                                                                  \
-    } while (0) /* 所在IO口时钟使能 */
+#define LCD_RD_GPIO_CLK_ENABLE()                                               \
+  do {                                                                         \
+    __HAL_RCC_GPIOC_CLK_ENABLE();                                              \
+  } while (0) /* 所在IO口时钟使能 */
 
 #define LCD_CS_GPIO_PORT GPIOC
 #define LCD_CS_GPIO_PIN GPIO_PIN_9
-#define LCD_CS_GPIO_CLK_ENABLE()                                                                                       \
-    do                                                                                                                 \
-    {                                                                                                                  \
-        __HAL_RCC_GPIOC_CLK_ENABLE();                                                                                  \
-    } while (0) /* 所在IO口时钟使能 */
+#define LCD_CS_GPIO_CLK_ENABLE()                                               \
+  do {                                                                         \
+    __HAL_RCC_GPIOC_CLK_ENABLE();                                              \
+  } while (0) /* 所在IO口时钟使能 */
 
 #define LCD_RS_GPIO_PORT GPIOC
 #define LCD_RS_GPIO_PIN GPIO_PIN_8
-#define LCD_RS_GPIO_CLK_ENABLE()                                                                                       \
-    do                                                                                                                 \
-    {                                                                                                                  \
-        __HAL_RCC_GPIOC_CLK_ENABLE();                                                                                  \
-    } while (0) /* 所在IO口时钟使能 */
+#define LCD_RS_GPIO_CLK_ENABLE()                                               \
+  do {                                                                         \
+    __HAL_RCC_GPIOC_CLK_ENABLE();                                              \
+  } while (0) /* 所在IO口时钟使能 */
 
 #define LCD_DATA_GPIO_PORT GPIOB
 #define LCD_DATA_GPIO_PIN GPIO_PIN_All /* 16个IO都用到 */
-#define LCD_DATA_GPIO_CLK_ENABLE()                                                                                     \
-    do                                                                                                                 \
-    {                                                                                                                  \
-        __HAL_RCC_GPIOB_CLK_ENABLE();                                                                                  \
-    } while (0) /* 所在IO口时钟使能 */
+#define LCD_DATA_GPIO_CLK_ENABLE()                                             \
+  do {                                                                         \
+    __HAL_RCC_GPIOB_CLK_ENABLE();                                              \
+  } while (0) /* 所在IO口时钟使能 */
 
 /* LCD 端口控制函数定义 */
 /* 利用操作寄存器的方式控制IO引脚提高屏幕的刷新率 */
-#define LCD_BL(x) LCD_BL_GPIO_PORT->BSRR = LCD_BL_GPIO_PIN << (16 * (!x)) /* 设置BL引脚 */
+#define LCD_BL(x)                                                              \
+  LCD_BL_GPIO_PORT->BSRR = LCD_BL_GPIO_PIN << (16 * (!x)) /* 设置BL引脚 */
 
-#define LCD_WR(x) LCD_WR_GPIO_PORT->BSRR = LCD_WR_GPIO_PIN << (16 * (!x)) /* 设置WR引脚 */
-#define LCD_RD(x) LCD_RD_GPIO_PORT->BSRR = LCD_RD_GPIO_PIN << (16 * (!x)) /* 设置RD引脚 */
-#define LCD_CS(x) LCD_CS_GPIO_PORT->BSRR = LCD_CS_GPIO_PIN << (16 * (!x)) /* 设置CS引脚 */
-#define LCD_RS(x) LCD_RS_GPIO_PORT->BSRR = LCD_RS_GPIO_PIN << (16 * (!x)) /* 设置RS引脚 */
+#define LCD_WR(x)                                                              \
+  LCD_WR_GPIO_PORT->BSRR = LCD_WR_GPIO_PIN << (16 * (!x)) /* 设置WR引脚 */
+#define LCD_RD(x)                                                              \
+  LCD_RD_GPIO_PORT->BSRR = LCD_RD_GPIO_PIN << (16 * (!x)) /* 设置RD引脚 */
+#define LCD_CS(x)                                                              \
+  LCD_CS_GPIO_PORT->BSRR = LCD_CS_GPIO_PIN << (16 * (!x)) /* 设置CS引脚 */
+#define LCD_RS(x)                                                              \
+  LCD_RS_GPIO_PORT->BSRR = LCD_RS_GPIO_PIN << (16 * (!x)) /* 设置RS引脚 */
 
 #define LCD_DATA_OUT(x) LCD_DATA_GPIO_PORT->ODR = x /* 写B0~B15引脚 */
 #define LCD_DATA_IN LCD_DATA_GPIO_PORT->IDR         /* 读B0~B15引脚 */
@@ -109,15 +108,14 @@
 /******************************************************************************************/
 
 /* LCD重要参数集 */
-typedef struct
-{
-    uint16_t width;   /* LCD 宽度 */
-    uint16_t height;  /* LCD 高度 */
-    uint16_t id;      /* LCD ID */
-    uint8_t dir;      /* 横屏还是竖屏控制：0，竖屏；1，横屏。 */
-    uint16_t wramcmd; /* 开始写gram指令 */
-    uint16_t setxcmd; /* 设置x坐标指令 */
-    uint16_t setycmd; /* 设置y坐标指令 */
+typedef struct {
+  uint16_t width;   /* LCD 宽度 */
+  uint16_t height;  /* LCD 高度 */
+  uint16_t id;      /* LCD ID */
+  uint8_t dir;      /* 横屏还是竖屏控制：0，竖屏；1，横屏。 */
+  uint16_t wramcmd; /* 开始写gram指令 */
+  uint16_t setxcmd; /* 设置x坐标指令 */
+  uint16_t setycmd; /* 设置y坐标指令 */
 } _lcd_dev;
 
 /* LCD参数 */
@@ -195,17 +193,18 @@ extern uint32_t g_back_color;  /* 背景颜色.默认为白色 */
  * -O2优化时, 如果lcd_wr_data使用__forceinline函数定义, 能到39帧刷屏
  * -O2优化时, 如果lcd_wr_data使用宏定义函数, 能到51帧刷屏
  */
-#define lcd_wr_data(data)                                                                                              \
-    {                                                                                                                  \
-        LCD_RS(1);                                                                                                     \
-        LCD_CS(0);                                                                                                     \
-        LCD_DATA_OUT(data);                                                                                            \
-        LCD_WR(0);                                                                                                     \
-        LCD_WR(1);                                                                                                     \
-        LCD_CS(1);                                                                                                     \
-    }
+#define lcd_wr_data(data)                                                      \
+  {                                                                            \
+    LCD_RS(1);                                                                 \
+    LCD_CS(0);                                                                 \
+    LCD_DATA_OUT(data);                                                        \
+    LCD_WR(0);                                                                 \
+    LCD_WR(1);                                                                 \
+    LCD_CS(1);                                                                 \
+  }
 
-void lcd_wr_xdata(uint16_t data);                  /* LCD写数据, 该函数同 lcd_wr_data 函数的功能一模一样 */
+void lcd_wr_xdata(
+    uint16_t data); /* LCD写数据, 该函数同 lcd_wr_data 函数的功能一模一样 */
 void lcd_wr_regno(volatile uint16_t regno);        /* LCD写寄存器编号/地址 */
 void lcd_write_reg(uint16_t regno, uint16_t data); /* LCD写寄存器的值 */
 
@@ -214,28 +213,40 @@ void lcd_display_on(void);               /* 开显示 */
 void lcd_display_off(void);              /* 关显示 */
 void lcd_scan_dir(uint8_t dir);          /* 设置屏扫描方向 */
 void lcd_display_dir(uint8_t dir);       /* 设置屏幕显示方向 */
-void lcd_ssd_backlight_set(uint8_t pwm); /* SSD1963 背光控制 */
+// void lcd_ssd_backlight_set(uint8_t pwm); /* SSD1963 背光控制 */
 
-void lcd_write_ram_prepare(void);                            /* 准备些GRAM */
-void lcd_set_cursor(uint16_t x, uint16_t y);                 /* 设置光标 */
-uint32_t lcd_read_point(uint16_t x, uint16_t y);             /* 读点(32位颜色,兼容LTDC)  */
-void lcd_draw_point(uint16_t x, uint16_t y, uint32_t color); /* 画点(32位颜色,兼容LTDC) */
+void lcd_write_ram_prepare(void);                /* 准备些GRAM */
+void lcd_set_cursor(uint16_t x, uint16_t y);     /* 设置光标 */
+// uint32_t lcd_read_point(uint16_t x, uint16_t y); /* 读点(32位颜色,兼容LTDC)  */
+// void lcd_draw_point(uint16_t x, uint16_t y,
+//                     uint32_t color); /* 画点(32位颜色,兼容LTDC) */
 
-void lcd_clear(uint16_t color);                                                    /* LCD清屏 */
-void lcd_fill_circle(uint16_t x, uint16_t y, uint16_t r, uint16_t color);          /* 填充实心圆 */
-void lcd_draw_circle(uint16_t x0, uint16_t y0, uint8_t r, uint16_t color);         /* 画圆 */
-void lcd_draw_hline(uint16_t x, uint16_t y, uint16_t len, uint16_t color);         /* 画水平线 */
-void lcd_set_window(uint16_t sx, uint16_t sy, uint16_t width, uint16_t height);    /* 设置窗口 */
-void lcd_fill(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey, uint32_t color); /* 纯色填充矩形(32位颜色,兼容LTDC) */
-void lcd_color_fill(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey, uint16_t *color);    /* 彩色填充矩形 */
-void lcd_draw_line(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t color);      /* 画直线 */
-void lcd_draw_rectangle(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t color); /* 画矩形 */
+void lcd_clear(uint16_t color); /* LCD清屏 */
+// void lcd_fill_circle(uint16_t x, uint16_t y, uint16_t r,
+//                      uint16_t color); /* 填充实心圆 */
+// void lcd_draw_circle(uint16_t x0, uint16_t y0, uint8_t r,
+//                      uint16_t color); /* 画圆 */
+// void lcd_draw_hline(uint16_t x, uint16_t y, uint16_t len,
+//                     uint16_t color); /* 画水平线 */
+// void lcd_set_window(uint16_t sx, uint16_t sy, uint16_t width,
+//                     uint16_t height); /* 设置窗口 */
+// void lcd_fill(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey,
+//               uint32_t color); /* 纯色填充矩形(32位颜色,兼容LTDC) */
+void lcd_color_fill(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey,
+                    uint16_t *color); /* 彩色填充矩形 */
+// void lcd_draw_line(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2,
+//                    uint16_t color); /* 画直线 */
+// void lcd_draw_rectangle(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2,
+//                         uint16_t color); /* 画矩形 */
 
-void lcd_show_char(uint16_t x, uint16_t y, char chr, uint8_t size, uint8_t mode, uint16_t color);   /* 显示一个字符 */
-void lcd_show_num(uint16_t x, uint16_t y, uint32_t num, uint8_t len, uint8_t size, uint16_t color); /* 显示数字 */
-void lcd_show_xnum(uint16_t x, uint16_t y, uint32_t num, uint8_t len, uint8_t size, uint8_t mode,
-                   uint16_t color); /* 扩展显示数字 */
-void lcd_show_string(uint16_t x, uint16_t y, uint16_t width, uint16_t height, uint8_t size, char *p,
-                     uint16_t color); /* 显示字符串 */
+// void lcd_show_char(uint16_t x, uint16_t y, char chr, uint8_t size, uint8_t
+// mode, uint16_t color);   /* 显示一个字符 */ void lcd_show_num(uint16_t x,
+// uint16_t y, uint32_t num, uint8_t len, uint8_t size, uint16_t color); /*
+// 显示数字 */ void lcd_show_xnum(uint16_t x, uint16_t y, uint32_t num, uint8_t
+// len, uint8_t size, uint8_t mode,
+//                    uint16_t color); /* 扩展显示数字 */
+// void lcd_show_string(uint16_t x, uint16_t y, uint16_t width, uint16_t height,
+// uint8_t size, char *p,
+//                      uint16_t color); /* 显示字符串 */
 
 #endif

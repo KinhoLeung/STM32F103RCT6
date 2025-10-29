@@ -315,7 +315,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>4</Optim>
+            <Optim>6</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -341,7 +341,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F103xE</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F1xx/Include;../Drivers/CMSIS/Include;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F1xx/Include;../Drivers/CMSIS/Include;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3;..\Middlewares\Third_Party\LVGL_PageManager\inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -399,6 +399,11 @@
               <FileName>lcd.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Core\Src\lcd.c</FilePath>
+            </File>
+            <File>
+              <FileName>touch.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\touch.c</FilePath>
             </File>
             <File>
               <FileName>main.c</FileName>
@@ -538,9 +543,9 @@
               </FileOption>
             </File>
             <File>
-              <FileName>touch.c</FileName>
+              <FileName>xanime.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Core\Src\touch.c</FilePath>
+              <FilePath>..\Core\Src\xanime.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1366,31 +1371,44 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Middlewares/lvgl/example/porting</GroupName>
-        </Group>
-        <Group>
-          <GroupName>Middlewares/lvgl/src/core</GroupName>
-        </Group>
-        <Group>
-          <GroupName>Middlewares/lvgl/src/draw</GroupName>
-        </Group>
-        <Group>
-          <GroupName>Middlewares/lvgl/src/extra</GroupName>
-        </Group>
-        <Group>
-          <GroupName>Middlewares/lvgl/src/font</GroupName>
-        </Group>
-        <Group>
-          <GroupName>Middlewares/lvgl/src/gpu</GroupName>
-        </Group>
-        <Group>
-          <GroupName>Middlewares/lvgl/src/hal</GroupName>
-        </Group>
-        <Group>
-          <GroupName>Middlewares/lvgl/src/misc</GroupName>
-        </Group>
-        <Group>
-          <GroupName>Middlewares/lvgl/src/widgwts</GroupName>
+          <GroupName>Middlewares//LVGL_PageManager</GroupName>
+          <Files>
+            <File>
+              <FileName>page_base.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Middlewares\Third_Party\LVGL_PageManager\src\page_base.c</FilePath>
+            </File>
+            <File>
+              <FileName>page_manager.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Middlewares\Third_Party\LVGL_PageManager\src\page_manager.c</FilePath>
+            </File>
+            <File>
+              <FileName>pm_anim.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Middlewares\Third_Party\LVGL_PageManager\src\pm_anim.c</FilePath>
+            </File>
+            <File>
+              <FileName>pm_drag.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Middlewares\Third_Party\LVGL_PageManager\src\pm_drag.c</FilePath>
+            </File>
+            <File>
+              <FileName>pm_router.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Middlewares\Third_Party\LVGL_PageManager\src\pm_router.c</FilePath>
+            </File>
+            <File>
+              <FileName>pm_router_i.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Middlewares\Third_Party\LVGL_PageManager\src\pm_router_i.c</FilePath>
+            </File>
+            <File>
+              <FileName>pm_state.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Middlewares\Third_Party\LVGL_PageManager\src\pm_state.c</FilePath>
+            </File>
+          </Files>
         </Group>
         <Group>
           <GroupName>::CMSIS</GroupName>
@@ -1411,31 +1429,19 @@
           <targetInfo name="STM32F103RCT6"/>
         </targetInfos>
       </component>
-      <component Cbundle="LVGL9" Cclass="LVGL" Cgroup="Demos" Csub="Assets" Cvendor="LVGL" Cversion="9.4.0" condition="LVGL-Essential">
-        <package name="lvgl" schemaVersion="1.7.37" url="https://raw.githubusercontent.com/lvgl/lvgl/master/env_support/cmsis-pack/" vendor="LVGL" version="9.4.0"/>
-        <targetInfos>
-          <targetInfo name="STM32F103RCT6"/>
-        </targetInfos>
-      </component>
-      <component Cbundle="LVGL9" Cclass="LVGL" Cgroup="Demos" Csub="Widgets" Cvendor="LVGL" Cversion="9.4.0" condition="LVGL-Essential-Assets">
-        <package name="lvgl" schemaVersion="1.7.37" url="https://raw.githubusercontent.com/lvgl/lvgl/master/env_support/cmsis-pack/" vendor="LVGL" version="9.4.0"/>
-        <targetInfos>
-          <targetInfo name="STM32F103RCT6"/>
-        </targetInfos>
-      </component>
       <component Cbundle="LVGL9" Cclass="LVGL" Cgroup="Essential" Cvendor="LVGL" Cversion="9.4.0">
         <package name="lvgl" schemaVersion="1.7.37" url="https://raw.githubusercontent.com/lvgl/lvgl/master/env_support/cmsis-pack/" vendor="LVGL" version="9.4.0"/>
         <targetInfos>
           <targetInfo name="STM32F103RCT6"/>
         </targetInfos>
       </component>
-      <component Cbundle="LVGL9" Cclass="LVGL" Cgroup="OS Abstraction Layer" Cvariant="FreeRTOS" Cvendor="LVGL" Cversion="9.4.0" condition="LVGL-Essential">
+      <component Cbundle="LVGL9" Cclass="LVGL" Cgroup="Porting" Csub="Display" Cvariant="Generic" Cvendor="LVGL" Cversion="9.4.0" condition="LVGL-Essential">
         <package name="lvgl" schemaVersion="1.7.37" url="https://raw.githubusercontent.com/lvgl/lvgl/master/env_support/cmsis-pack/" vendor="LVGL" version="9.4.0"/>
         <targetInfos>
           <targetInfo name="STM32F103RCT6"/>
         </targetInfos>
       </component>
-      <component Cbundle="LVGL9" Cclass="LVGL" Cgroup="Porting" Csub="Display" Cvariant="Generic" Cvendor="LVGL" Cversion="9.4.0" condition="LVGL-Essential">
+      <component Cbundle="LVGL9" Cclass="LVGL" Cgroup="Porting" Csub="Input" Cvariant="Generic" Cvendor="LVGL" Cversion="9.4.0" condition="LVGL-Essential">
         <package name="lvgl" schemaVersion="1.7.37" url="https://raw.githubusercontent.com/lvgl/lvgl/master/env_support/cmsis-pack/" vendor="LVGL" version="9.4.0"/>
         <targetInfos>
           <targetInfo name="STM32F103RCT6"/>
@@ -1462,6 +1468,22 @@
       <file attr="config" category="header" name="examples\porting\lv_port_disp_template.h" version="2.1.0">
         <instance index="0">RTE\LVGL\lv_port_disp_template.h</instance>
         <component Cbundle="LVGL9" Cclass="LVGL" Cgroup="Porting" Csub="Display" Cvariant="Generic" Cvendor="LVGL" Cversion="9.4.0" condition="LVGL-Essential" isDefaultVariant="1"/>
+        <package name="lvgl" schemaVersion="1.7.37" url="https://raw.githubusercontent.com/lvgl/lvgl/master/env_support/cmsis-pack/" vendor="LVGL" version="9.4.0"/>
+        <targetInfos>
+          <targetInfo name="STM32F103RCT6"/>
+        </targetInfos>
+      </file>
+      <file attr="config" category="sourceC" name="examples\porting\lv_port_indev_template.c" version="2.1.0">
+        <instance index="0">RTE\LVGL\lv_port_indev_template.c</instance>
+        <component Cbundle="LVGL9" Cclass="LVGL" Cgroup="Porting" Csub="Input" Cvariant="Generic" Cvendor="LVGL" Cversion="9.4.0" condition="LVGL-Essential" isDefaultVariant="1"/>
+        <package name="lvgl" schemaVersion="1.7.37" url="https://raw.githubusercontent.com/lvgl/lvgl/master/env_support/cmsis-pack/" vendor="LVGL" version="9.4.0"/>
+        <targetInfos>
+          <targetInfo name="STM32F103RCT6"/>
+        </targetInfos>
+      </file>
+      <file attr="config" category="header" name="examples\porting\lv_port_indev_template.h" version="2.1.0">
+        <instance index="0">RTE\LVGL\lv_port_indev_template.h</instance>
+        <component Cbundle="LVGL9" Cclass="LVGL" Cgroup="Porting" Csub="Input" Cvariant="Generic" Cvendor="LVGL" Cversion="9.4.0" condition="LVGL-Essential" isDefaultVariant="1"/>
         <package name="lvgl" schemaVersion="1.7.37" url="https://raw.githubusercontent.com/lvgl/lvgl/master/env_support/cmsis-pack/" vendor="LVGL" version="9.4.0"/>
         <targetInfos>
           <targetInfo name="STM32F103RCT6"/>

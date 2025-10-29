@@ -25,8 +25,12 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
-#include "lcd.h"
-#include "touch.h"
+#include <string.h>
+#include "lvgl.h"
+#include "page_manager.h"
+#include "page_base.h"
+#include "pm_factory.h"
+#include "pm_log.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -59,7 +63,119 @@ void MX_FREERTOS_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+static pm_manager_t *g_pm = NULL;
+static bool g_is_on_a = true;
 
+static void on_root_click(lv_event_t *e)
+{
+	(void)e;
+	if(!g_pm) return;
+	if(g_is_on_a){
+		pm_manager_push(g_pm, "B", NULL);
+		g_is_on_a = false;
+	}else{
+		pm_manager_back_home(g_pm);
+		g_is_on_a = true;
+	}
+}
+/* 简单页面 A */
+static void page_a_onViewLoad(pm_page_t *p)
+{
+	lv_obj_set_size(p->root, LV_PCT(100), LV_PCT(100));
+    lv_obj_set_style_bg_color(p->root, lv_color_hex(0x223344), 0);
+    lv_obj_add_flag(p->root, LV_OBJ_FLAG_CLICKABLE);
+	lv_obj_t *label = lv_label_create(p->root);
+	lv_label_set_text(label, "Page A\nClick to push -> Page B");
+	lv_obj_center(label);
+	lv_obj_add_event_cb(p->root, on_root_click, LV_EVENT_RELEASED, NULL);
+}
+
+static void page_b_onViewLoad(pm_page_t *p)
+{
+	lv_obj_set_size(p->root, LV_PCT(100), LV_PCT(100));
+    lv_obj_set_style_bg_color(p->root, lv_color_hex(0x334455), 0);
+    lv_obj_add_flag(p->root, LV_OBJ_FLAG_CLICKABLE);
+	lv_obj_t *label = lv_label_create(p->root);
+	lv_label_set_text(label, "Page B\nClick to pop <- Page A");
+	lv_obj_center(label);
+	lv_obj_add_event_cb(p->root, on_root_click, LV_EVENT_RELEASED, NULL);
+}
+
+static const pm_page_vtable_t PAGE_A_VT = {
+	.onCustomAttrConfig = NULL,
+	.onViewLoad = page_a_onViewLoad,
+	.onViewDidLoad = NULL,
+	.onViewWillAppear = NULL,
+	.onViewDidAppear = NULL,
+	.onViewWillDisappear = NULL,
+	.onViewDidDisappear = NULL,
+	.onViewUnload = NULL,
+	.onViewDidUnload = NULL,
+};
+
+static const pm_page_vtable_t PAGE_B_VT = {
+	.onCustomAttrConfig = NULL,
+	.onViewLoad = page_b_onViewLoad,
+	.onViewDidLoad = NULL,
+	.onViewWillAppear = NULL,
+	.onViewDidAppear = NULL,
+	.onViewWillDisappear = NULL,
+	.onViewDidDisappear = NULL,
+	.onViewUnload = NULL,
+	.onViewDidUnload = NULL,
+};
+
+/* 工厂：根据类名创建页面 */
+static pm_page_t *demo_factory_create(const char *class_name, void *user)
+{
+	(void)user;
+	if(class_name == NULL) return NULL;
+	if(strcmp(class_name, "PageA") == 0){
+		return pm_page_create(&PAGE_A_VT);
+	}
+	if(strcmp(class_name, "PageB") == 0){
+		return pm_page_create(&PAGE_B_VT);
+	}
+	return NULL;
+}
+
+
+
+/* Demo 入口：创建 manager，注册页面并展示 */
+static void pm_overlay_timer_cb(lv_timer_t *timer)
+{
+	/* 在活动屏上放置全屏透明覆盖，绑定点击事件以切换页面 */
+	lv_obj_t *overlay = lv_obj_create(lv_scr_act());
+	lv_obj_set_size(overlay, LV_PCT(100), LV_PCT(100));
+	lv_obj_set_style_bg_opa(overlay, LV_OPA_TRANSP, LV_PART_MAIN);
+	lv_obj_add_event_cb(overlay, on_root_click, LV_EVENT_RELEASED, NULL);
+	if(timer) lv_timer_del(timer);
+}
+
+void pm_demo_c_run(void)
+{
+	pm_factory_t fac = { demo_factory_create, NULL, NULL };
+	pm_manager_t *m = pm_manager_create(&fac);
+	if(!m) return;
+	g_pm = m;
+
+	/* 全局进入动画 */
+	pm_manager_set_global_load_anim(m, PM_LOAD_ANIM_MOVE_LEFT, PM_PAGE_ANIM_TIME_DEFAULT, PM_PAGE_ANIM_PATH_DEFAULT);
+
+	/* 注册并安装 */
+	pm_manager_install(m, "PageA", "A");
+	pm_manager_install(m, "PageB", "B");
+
+	/* 设定根样式可选：此处留空使用默认 */
+	/* pm_manager_set_root_default_style(m, &some_style); */
+
+	/* 显示首页 */
+	pm_manager_push(m, "A", NULL);
+
+	/* 异步创建覆盖并绑定点击事件 */
+	lv_timer_t *t = lv_timer_create_basic();
+	lv_timer_set_cb(t, pm_overlay_timer_cb);
+}
 /* USER CODE END 0 */
 
 /**
@@ -93,23 +209,19 @@ int main(void)
   MX_GPIO_Init();
   MX_UART5_Init();
   /* USER CODE BEGIN 2 */
-  // lcd_init();                         /* 初始化LCD */
-  // tp_dev.init();                      /* 触摸屏初始化 */
-  // uint8_t lcd_id[12];
-  // g_point_color = RED;
-  // sprintf((char *)lcd_id, "LCD ID:%04X", lcddev.id);  /* 将LCD ID打印到lcd_id数组 */
-  // lcd_clear(BLUE);
-  // lcd_show_string(10, 40, 240, 32, 32, "STM32", RED);
-  // lcd_show_string(10, 80, 240, 24, 24, "TFTLCD TEST", RED);
-  // lcd_show_string(10, 110, 240, 16, 16, "ATOM@ALIENTEK", RED);
-  // lcd_show_string(10, 130, 240, 16, 16, (char *)lcd_id, RED); /* 显示LCD ID */
-  extern void lcd_init(void);
+  extern void lv_init(void);
   extern void lv_port_disp_init(void);
+  extern void lv_port_indev_init(void);
+  lv_init();
   lv_port_disp_init();
-  printf("hello lvgl\r\n");
+  lv_port_indev_init();
+
+
+  pm_demo_c_run();
+  printf("pm_demo_c_run\n");
   /* USER CODE END 2 */
 
-  /* Init scheduler */
+  /* Init scheduler */         
   osKernelInitialize();
 
   /* Call init function for freertos objects (in cmsis_os2.c) */
