@@ -54,11 +54,10 @@ void pm_manager_destroy(pm_manager_t* m)
         }
     }
 
-    /* Free pool entries if factory destroy provided */
     for (size_t i = 0; i < kv_size(m->pool); ++i) {
         pm_page_t* p = kv_A(m->pool, i);
         if (!p) continue;
-        if (p->root) {
+        if (p->root && p->priv.State != PM_PAGE_STATE_IDLE) {
             p->priv.IsCached = false;
             p->priv.State = PM_PAGE_STATE_UNLOAD;
             pm_state_update(m, p);
@@ -142,7 +141,7 @@ bool pm_manager_uninstall(pm_manager_t* m, const char* app_name)
     return true;
 }
 
-const char* pm_manager_get_prev_name(pm_manager_t* m)
+const char* pm_manager_get_prev_name(const pm_manager_t* m)
 {
     static const char* empty = "EMPTY_PAGE";
     return (m && m->prev && m->prev->name) ? m->prev->name : empty;
